@@ -1,0 +1,34 @@
+{
+  "name": "cylon-galileo",
+  "version": "0.1.0",
+  "main": "lib/cylon-galileo.js",
+  "description": "Cylon module for galileo board",
+  "homepage": "http://cylonjs.com",
+  "bugs": "https://github.com/hybridgroup/cylon-galileo/issues",
+  "author": {
+    "name": "The Hybrid Group",
+    "email": "cylonjs@hybridgroup.com",
+    "url": "http://hybridgroup.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hybridgroup/cylon-galileo"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0"
+    }
+  ],
+  "devDependencies": {
+    "sinon-chai": "~2.5.0",
+    "chai": "~1.9.0",
+    "mocha": "~1.17.1",
+    "sinon": "~1.8.2",
+    "jshint": "~2.4.4"
+  },
+  "dependencies": {
+    "node-namespace": "~1.0.0",
+    "cylon": ">= 0.13.2",
+    "cylon-gpio": ">= 0.13.1"
+  }
+}
