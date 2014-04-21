@@ -1,9 +1,9 @@
-# Cylon.js For <%= adaptorClassName %>
+# Cylon.js For cylon-galileo
 
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and
 physical computing using Node.js
 
-This repository contains the Cylon adaptor for <%= adaptorClassName %>.
+This repository contains the Cylon adaptor for cylon-galileo.
 
 Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
 
@@ -15,7 +15,7 @@ https://github.com/hybridgroup/cylon
 
 ## Getting Started
 
-Install the module with: `npm install <%= adaptorName %>`
+Install the module with: `npm install cylon-galileo`
 
 ## Examples
 
@@ -27,8 +27,8 @@ Install the module with: `npm install <%= adaptorName %>`
 var Cylon = require('cylon');
 
 Cylon.robot({
-  connection: { name: '<%= basename %>', adaptor: '<%= basename %>' },
-  device: {name: '<%= basename %>', driver: '<%= basename %>'},
+  connection: { name: 'galileo', adaptor: 'galileo' },
+  device: {name: 'galileo', driver: 'galileo'},
 
   work: function(my) {
     // provide an example of your module here

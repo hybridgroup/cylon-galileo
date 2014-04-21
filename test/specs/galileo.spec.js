@@ -1,8 +1,8 @@
 "use strict";
 
-var module = source("<%= adaptorName %>");
+var module = source("galileo");
 
-describe("Cylon.<%= adaptorClassName %>", function() {
+describe("Cylon.Galileo", function() {
   it("should be able to register", function() {
     expect(module.register).to.be.a('function');
   });
