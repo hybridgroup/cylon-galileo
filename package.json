@@ -27,7 +27,6 @@
     "jshint": "~2.4.4"
   },
   "dependencies": {
-    "node-namespace": "~1.0.0",
     "cylon": ">= 0.13.2",
     "cylon-gpio": ">= 0.13.1"
   }
