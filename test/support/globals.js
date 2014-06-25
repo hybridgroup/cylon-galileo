@@ -6,18 +6,17 @@ process.env.NODE_ENV = 'test';
 
 var path = require('path');
 var chai = require('chai');
-var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 
-require('cylon');
-Logger.setup(false); // turn off Cylon's logger by default
+var Cylon = require('cylon');
+Cylon.Logger.setup(false) // disable Cylon's logger for tests
 
 global.chai = chai;
 global.should = chai.should();
 global.expect = chai.expect;
 global.assert = chai.assert;
 global.AssertionError = chai.AssertionError;
-global.sinon = sinon;
+global.sinon = require('sinon');
 global.spy = sinon.spy;
 global.stub = sinon.stub;
 
@@ -45,4 +44,4 @@ global.err = function (fn, msg) {
 chai.use(sinonChai);
 
 // if you want a detailed error stack output
-chai.Assertion.includeStack = true;
+//chai.Assertion.includeStack = true;
