@@ -391,30 +391,119 @@ describe("Galileo", function() {
   });
 
   describe("#servoWrite", function() {
-    it("needs tests");
+    beforeEach(function() {
+      adaptor.pwmWrite = spy();
+    });
+
+    it("calls #pwmWrite", function() {
+      adaptor.servoWrite(3, 100, 150, 12);
+      expect(adaptor.pwmWrite).to.be.calledWith(3, 100, 150, 12, 'servo');
+    });
+
+    it("changes minimum frequency to 126", function() {
+      adaptor.servoWrite(3, 100, 100, 12);
+      expect(adaptor.pwmWrite).to.be.calledWith(3, 100, 126, 12, 'servo');
+    });
   });
 
   describe("#_pwmPin", function() {
-    it("needs tests");
+    context("if the pin is already registered", function() {
+      var mockPin;
+
+      beforeEach(function() {
+        mockPin = {};
+        adaptor.pwmPins["3"] = mockPin;
+      });
+
+      it("returns the existing pin", function() {
+        expect(adaptor._pwmPin(3, 100)).to.be.eql(mockPin);
+      });
+    });
+
+    context("if the pin isn't registered", function() {
+      it("creates a new pin", function() {
+        var pin = adaptor._pwmPin(3, 100);
+        expect(pin).to.be.an.instanceOf(PwmPin);
+        expect(adaptor.pwmPins["3"]).to.be.eql(pin);
+      });
+    });
   });
 
   describe("#_digitalPin", function() {
-    it("needs tests");
+    context("if the pin is already registered", function() {
+      var mockPin;
+
+      beforeEach(function() {
+        mockPin = {};
+        adaptor.pins["18"] = mockPin;
+      });
+
+      it("returns the existing pin", function() {
+        expect(adaptor._digitalPin(3, 100)).to.be.eql(mockPin);
+      });
+    });
+
+    context("if the pin isn't registered", function() {
+      it("creates a new pin", function() {
+        var pin = adaptor._digitalPin(3, 100);
+        expect(pin).to.be.an.instanceOf(Cylon.IO.DigitalPin);
+        expect(adaptor.pins["18"]).to.be.eql(pin);
+      });
+    });
   });
 
   describe("#_analogPin", function() {
-    it("needs tests");
+    context("if the pin is already registered", function() {
+      var mockPin;
+
+      beforeEach(function() {
+        mockPin = {};
+        adaptor.analogPins["3"] = mockPin;
+      });
+
+      it("returns the existing pin", function() {
+        expect(adaptor._analogPin(3, 100)).to.be.eql(mockPin);
+      });
+    });
+
+    context("if the pin isn't registered", function() {
+      it("creates a new pin", function() {
+        var pin = adaptor._analogPin(3, 100);
+        expect(pin).to.be.an.instanceOf(AnalogPin);
+        expect(adaptor.analogPins["3"]).to.be.eql(pin);
+      });
+    });
   });
 
   describe("#_translatePin", function() {
-    it("needs tests");
+    it("translates the pin number to the board number", function() {
+      expect(adaptor._translatePin(13)).to.be.eql('39')
+      expect(adaptor._translatePin(0)).to.be.eql('50')
+    });
   });
 
   describe("#_translatePwmPin", function() {
-    it("needs tests");
+    it("translates the pin number to the board number", function() {
+      expect(adaptor._translatePwmPin(3)).to.be.eql('3')
+      expect(adaptor._translatePwmPin(10)).to.be.eql('7')
+    });
   });
 
   describe("#_disconnectPins", function() {
-    it("needs tests");
+    var pwmPin, pin;
+
+    beforeEach(function() {
+      pin = { disconnectSync: spy() };
+      pwmPin = { disconnectSync: spy() };
+
+      adaptor.pins = [pin];
+      adaptor.pwmPins = [pwmPin];
+    });
+
+    it("calls #disconnectSync on all pins", function() {
+      adaptor._disconnectPins();
+      expect(pin.disconnectSync).to.be.called;
+      expect(pwmPin.disconnectSync).to.be.called;
+    });
   });
 });
