@@ -281,11 +281,113 @@ describe("Galileo", function() {
   });
 
   describe("#_pwmWrite", function() {
-    it("needs tests");
+    var mockPin;
+
+    beforeEach(function() {
+      mockPin = new EventEmitter();
+      mockPin.connect = spy();
+      mockPin.pwmWrite = spy();
+      mockPin.connected = false;
+
+      adaptor._pwmPin = stub().returns(mockPin);
+    });
+
+    it("looks up or creates a new PWM pin", function() {
+      adaptor._pwmWrite(2, 10, 20, 30, 'pwm');
+      expect(adaptor._pwmPin).to.be.calledWith(2, 10);
+    });
+
+    context("if the pin is connected", function() {
+      beforeEach(function() {
+        mockPin.connected = true;
+        adaptor._pwmWrite(2, 10, 20, 30, 'pwm');
+      });
+
+      it("writes the duty cycle to the pin", function() {
+        expect(mockPin.pwmWrite).to.be.calledWith(20);
+      });
+    });
+
+    context("if the pin is not connected", function() {
+      beforeEach(function() {
+        adaptor._pwmWrite(2, 10, 20, 30, 'pwm');
+      });
+
+      it("connects the pin", function() {
+        expect(mockPin.connect).to.be.called;
+      });
+
+      context("when the pin is connected", function() {
+        beforeEach(function() {
+          adaptor.connection = { emit: spy() };
+          mockPin.emit('connect');
+        });
+
+        it("emits the 'connect' event", function() {
+          expect(adaptor.connection.emit).to.be.calledWith('pwmConnect');
+        });
+
+        it("writes the duty cycle to the pin", function() {
+          expect(mockPin.pwmWrite).to.be.calledWith(20);
+        });
+      });
+
+      context("when the pin is written", function() {
+        beforeEach(function() {
+          adaptor.connection = { emit: spy() };
+          mockPin.emit('pwmWrite');
+        });
+
+        it("emits the 'write' event", function() {
+          expect(adaptor.connection.emit).to.be.calledWith('pwmWrite');
+        });
+      });
+    })
   });
 
   describe("#pwmWrite", function() {
-    it("needs tests");
+    var mockPwm;
+
+    beforeEach(function() {
+      mockPwm = { period: 'period', duty: 'duty' };
+
+      stub(Cylon.IO.Utils, 'periodAndDuty').returns(mockPwm);
+      adaptor._pwmWrite = spy();
+
+      adaptor.pwmWrite(2, 100, 1000, 101, 'event');
+    });
+
+    afterEach(function() {
+      Cylon.IO.Utils.periodAndDuty.restore();
+    });
+
+    it("uses Cylon.IO.Utils to calculate the period and duty", function() {
+      expect(Cylon.IO.Utils.periodAndDuty).to.be.calledWith(100, 1000, 101, 'high');
+    });
+
+    it("calls #_pwmWrite with the calculated values", function() {
+      expect(adaptor._pwmWrite).to.be.calledWith(2, 'period', 'duty', 'event');
+    })
+
+    context("if no event name is provided", function() {
+      beforeEach(function() {
+        adaptor.pwmWrite(2, 100, 1000, 101);
+      });
+
+      it("defaults to 'pwm'", function() {
+        expect(adaptor._pwmWrite).to.be.calledWith(2, 'period', 'duty', 'pwm');
+      });
+    });
+
+    context("if no frequency is provided", function() {
+      beforeEach(function() {
+        adaptor.pwmWrite(2, 100, null, 101);
+      });
+
+      it("defaults to 2000", function() {
+        expect(Cylon.IO.Utils.periodAndDuty).to.be.calledWith(100, 2000, 101, 'high');
+      });
+    });
   });
 
   describe("#servoWrite", function() {
