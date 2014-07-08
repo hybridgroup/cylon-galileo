@@ -262,6 +262,8 @@ Cylon.robot({
 
 ## Release History
 
+Version 0.2.0 - Compatibility with Cylon 0.16.0
+
 Version 0.1.0 - Initial release for ongoing development
 
 ## License
