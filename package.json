@@ -1,6 +1,6 @@
 {
   "name": "cylon-galileo",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "lib/cylon-galileo.js",
   "description": "Cylon module for galileo board",
   "homepage": "http://cylonjs.com",
@@ -28,12 +28,12 @@
   },
 
   "peerDependencies": {
-    "cylon":      ">= 0.16.0 < 1",
-    "cylon-gpio": ">= 0.16.0 < 1"
+    "cylon":      ">= 0.18.0 < 1",
+    "cylon-gpio": ">= 0.18.0 < 1"
   },
 
   "dependencies": {
-    "cylon":      "~0.16.0",
-    "cylon-gpio": "~0.16.0"
+    "cylon":      "~0.18.0",
+    "cylon-gpio": "~0.18.0"
   }
 }
