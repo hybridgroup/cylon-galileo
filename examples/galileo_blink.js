@@ -6,7 +6,6 @@ Cylon.robot({
 
   work: function(my) {
     every((1).second(), function() {
-    	console.log("blink");
       my.led.toggle();
     });
   }
