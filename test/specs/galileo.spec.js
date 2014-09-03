@@ -158,11 +158,11 @@ describe("Galileo", function() {
 
       beforeEach(function() {
         mockPin = { connect: spy(), on: spy() };
-        adaptor.pins["51"] = mockPin;
+        adaptor.pins["7"] = mockPin;
       });
 
       it('does not try to connect it', function() {
-        adaptor.digitalRead(1);
+        adaptor.digitalRead(13);
         expect(mockPin.connect).to.not.be.called;
       });
     });
@@ -227,8 +227,8 @@ describe("Galileo", function() {
 
       beforeEach(function() {
         mockPin = { digitalWrite: spy() };
-        adaptor.pins["51"] = mockPin;
-        adaptor.digitalWrite(1, "data");
+        adaptor.pins["0"] = mockPin;
+        adaptor.digitalWrite(5, "data");
       });
 
       it("tells the pin to write the value", function() {
@@ -435,19 +435,19 @@ describe("Galileo", function() {
 
       beforeEach(function() {
         mockPin = {};
-        adaptor.pins["18"] = mockPin;
+        adaptor.pins["6"] = mockPin;
       });
 
       it("returns the existing pin", function() {
-        expect(adaptor._digitalPin(3, 100)).to.be.eql(mockPin);
+        expect(adaptor._digitalPin(4, 100)).to.be.eql(mockPin);
       });
     });
 
     context("if the pin isn't registered", function() {
       it("creates a new pin", function() {
-        var pin = adaptor._digitalPin(3, 100);
+        var pin = adaptor._digitalPin(4, 100);
         expect(pin).to.be.an.instanceOf(Cylon.IO.DigitalPin);
-        expect(adaptor.pins["18"]).to.be.eql(pin);
+        expect(adaptor.pins["6"]).to.be.eql(pin);
       });
     });
   });
@@ -477,8 +477,8 @@ describe("Galileo", function() {
 
   describe("#_translatePin", function() {
     it("translates the pin number to the board number", function() {
-      expect(adaptor._translatePin(13)).to.be.eql('39')
-      expect(adaptor._translatePin(0)).to.be.eql('50')
+      expect(adaptor._translatePin(13)).to.be.eql('7')
+      expect(adaptor._translatePin(0)).to.be.eql('11')
     });
   });
 
