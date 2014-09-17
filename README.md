@@ -266,6 +266,8 @@ Cylon.robot({
 
 ## Release History
 
+Version 0.3.1 - Add deprecation warning
+
 Version 0.3.0 - Compatibility with Cylon 0.18.0
 
 Version 0.2.0 - Compatibility with Cylon 0.16.0

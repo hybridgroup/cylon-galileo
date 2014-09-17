@@ -1,6 +1,6 @@
 {
   "name": "cylon-galileo",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "lib/cylon-galileo.js",
   "description": "Cylon module for galileo board",
   "homepage": "http://cylonjs.com",
