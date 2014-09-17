@@ -4,7 +4,7 @@ node_js:
 
 install:
   - npm install
-  - npm install git://github.com/hybridgroup/cylon.git#dev
+  - 'if [[ "$TRAVIS_BRANCH" != "master" ]]; then npm install git://github.com/hybridgroup/cylon.git#dev; fi'
 
 script:
   - make test
