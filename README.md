@@ -1,5 +1,9 @@
 # Cylon.js For cylon-galileo
 
+## DEPRECATION WARNING
+
+### This repository has been deprecated by the cylon-intel-iot module located at https://github.com/hybridgroup/cylon-intel-iot
+
 Cylon.js (http://cylonjs.com) is a JavaScript framework for robotics and
 physical computing using Node.js
 
