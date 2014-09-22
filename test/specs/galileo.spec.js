@@ -62,13 +62,12 @@ describe("Galileo", function() {
 
   describe("#disconnect", function() {
     beforeEach(function() {
-      adaptor._noop = spy();
       adaptor._disconnectPins = spy();
       adaptor.disconnect(function() {});
     });
 
     it("no-ops all the commands", function() {
-      expect(adaptor._noop).to.be.called;
+      expect(adaptor.digitalRead).to.not.be.eql(Galileo.prototype.digitalRead);
       expect(adaptor._disconnectPins).to.be.called;
     });
   });
