@@ -107,7 +107,7 @@ describe("Galileo", function() {
         mockPin.connect = spy();
         mockPin.analogRead = spy();
 
-        adaptor._analogPin.returns(mockPin)
+        adaptor._analogPin.returns(mockPin);
         adaptor.analogRead(1, callback);
       });
 
@@ -141,9 +141,9 @@ describe("Galileo", function() {
         });
 
         it("triggers the callback with the data", function() {
-          expect(callback).to.be.calledWith('data');
+          expect(callback).to.be.calledWith(null, 'data');
         });
-      })
+      });
     });
   });
 
@@ -210,7 +210,7 @@ describe("Galileo", function() {
         });
 
         it("triggers the callback with the data", function() {
-          expect(callback).to.be.calledWith('data');
+          expect(callback).to.be.calledWith(null, 'data');
         });
       })
     });
